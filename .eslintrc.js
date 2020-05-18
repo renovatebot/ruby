@@ -38,6 +38,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/camelcase': 0,
+    '@typescript-eslint/no-floating-promises': 2,
 
     'sort-imports': [
       'error',

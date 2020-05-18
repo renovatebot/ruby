@@ -164,11 +164,11 @@ async function getBuildList({
         );
       } else {
         log('Uploading release:', version);
-        uploadAsset(api, cfg, version);
+        await uploadAsset(api, cfg, version);
       }
     }
   } catch (error) {
     log(error.stack);
     setFailed(error.message);
   }
-})();
+})().catch(console.error);
