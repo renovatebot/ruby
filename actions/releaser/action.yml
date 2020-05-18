@@ -1,0 +1,10 @@
+name: 'releaser'
+description: ''
+inputs:
+  dry-run:
+    description: 'do not publish anything'
+    required: false
+    default: false
+runs:
+  using: 'node12'
+  main: '../../dist/releaser/index.js'
