@@ -27,8 +27,8 @@ RUN install-apt \
   ;
 
 RUN set -ex; \
-  git clone https://github.com/rbenv/ruby-build.git \
-  PREFIX=/usr/local ./ruby-build/install.sh \
+  git clone https://github.com/rbenv/ruby-build.git; \
+  PREFIX=/usr/local ./ruby-build/install.sh; \
   rm -rf ruby-build;
 
 # rebuild trigger
