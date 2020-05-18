@@ -12,7 +12,7 @@
     "eslint": "eslint . --ext .js,.mjs,.ts",
     "eslint:fix": "yarn eslint --fix",
     "lint": "run-s eslint prettier",
-    "prepare": "run-s compile:*",
+    "prepare": "run-s compile:builder",
     "prettier": "prettier \"{**/*,*}.*\" --list-different",
     "prettier:fix": "prettier \"{**/*,*}.*\" --write",
     "start:builder": "run-s compile:builder && node dist/builder",

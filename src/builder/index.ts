@@ -138,7 +138,7 @@ async function getBuildList({
     shell.mkdir('-p', `${ws}/.cache`);
 
     for (const version of versions) {
-      if (hasAsset(api, cfg, version)) {
+      if (await hasAsset(api, cfg, version)) {
         if (cfg.dryRun) {
           log.warn(
             chalk.yellow('[DRY_RUN] Would skipp existing version:'),
