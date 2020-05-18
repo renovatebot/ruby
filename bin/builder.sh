@@ -1,12 +1,13 @@
 #!/bin/bash
 
-VERSION=${1}
+RUBY_VERSION=${1}
+
+CODENAME=$(. /etc/os-release && echo ${VERSION_ID})
+
 NAME=ruby
 
-. /etc/os-release
+echo "Building ruby ${RUBY_VERSION} for ${CODENAME}"
+ruby-build ${RUBY_VERSION} /usr/local/${NAME}/${RUBY_VERSION}
 
-echo "Building version: ${VERSION}"
-ruby-build ${VERSION} /usr/local/${NAME}/${VERSION}
-
-echo "Compressing version: ${VERSION}"
-tar -cJf /cache/${NAME}-${VERSION}-${VERSION_ID}.tar.xz -C /usr/local/${NAME} ${VERSION}
+echo "Compressing ruby ${RUBY_VERSION} for ${CODENAME}"
+tar -cJf /cache/${NAME}-${RUBY_VERSION}-${CODENAME}.tar.xz -C /usr/local/${NAME} ${RUBY_VERSION}
