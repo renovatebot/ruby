@@ -47,9 +47,9 @@ export async function uploadAsset(
         : rel.upload_url;
 
     const name = getName(cfg, version);
-    const data = await readBuffer(`.cache/${name}`);
+    const data = await readBuffer(`.cache/${name}.tar.xz`);
 
-    api.repos.uploadReleaseAsset({
+    await api.repos.uploadReleaseAsset({
       data,
       name,
       headers: {
