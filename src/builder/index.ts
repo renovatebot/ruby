@@ -11,7 +11,7 @@ import { getConfig } from '../utils/config';
 import { GitHub, hasAsset, uploadAsset } from '../utils/github';
 import log from '../utils/logger';
 
-let builds = 1;
+let builds = 99;
 
 async function docker(...args: string[]): Promise<void> {
   await exec('docker', [...args]);
