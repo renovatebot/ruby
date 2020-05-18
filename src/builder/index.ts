@@ -8,7 +8,6 @@ import shell from 'shelljs';
 import { Config } from '../types/builder';
 import { exec, getArg, getWorkspace } from '../util';
 import { getConfig } from '../utils/config';
-import { preparePages } from '../utils/git';
 import { GitHub, hasAsset, uploadAsset } from '../utils/github';
 import log from '../utils/logger';
 
@@ -118,8 +117,6 @@ async function getBuildList({
   try {
     log.info('Builder started');
     const ws = getWorkspace();
-
-    await preparePages(ws);
 
     const cfg = await getConfig();
 
