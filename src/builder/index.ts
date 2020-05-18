@@ -1,6 +1,6 @@
 import 'source-map-support/register';
 import 'renovate/dist/util/cache/global/file';
-import { createWriteStream, existsSync } from 'fs';
+import { createWriteStream } from 'fs';
 import { pipeline as _pipeline } from 'stream';
 import { promisify } from 'util';
 import { setFailed } from '@actions/core';
@@ -11,12 +11,15 @@ import { get as getVersioning } from 'renovate/dist/versioning';
 import shell from 'shelljs';
 import tar from 'tar';
 import { Config } from '../types/builder';
-import { exec, getEnv, getWorkspace } from '../util';
+import { exec, getArg, getWorkspace } from '../util';
 import { getConfig } from '../utils/config';
 import { preparePages } from '../utils/git';
+import { GitHub, hasAsset, uploadAsset } from '../utils/github';
 import log from '../utils/logger';
 
 const pipeline = promisify(_pipeline);
+
+let builds = 1;
 
 async function docker(...args: string[]): Promise<void> {
   await exec('docker', [...args]);
@@ -123,14 +126,10 @@ async function getBuildList({
   return allVersions;
 }
 
-const DefaultUbuntuRelease = '18.04';
 (async () => {
   try {
     log.info('Builder started');
     const ws = getWorkspace();
-    const data = `${ws}/data/${
-      getEnv('UBUNTU_VERSION') || DefaultUbuntuRelease
-    }`;
 
     await preparePages(ws);
 
@@ -141,16 +140,17 @@ const DefaultUbuntuRelease = '18.04';
       cfg.lastOnly = true;
     }
 
+    const token = getArg('token', { required: true });
+    const api = new GitHub(token);
+
     log('config:', JSON.stringify(cfg));
 
     const versions = await getBuildList(cfg);
 
     shell.mkdir('-p', `${ws}/.cache/${cfg.image}`);
 
-    let builds = 5;
-
     for (const version of versions) {
-      if (existsSync(`${data}/${cfg.image}-${version}.tar.xz`)) {
+      if (hasAsset(api, cfg, version)) {
         if (cfg.dryRun) {
           log.warn(
             chalk.yellow('[DRY_RUN] Would skipp existing version:'),
@@ -184,6 +184,15 @@ const DefaultUbuntuRelease = '18.04';
       );
 
       await pipeline(input, compressor, output);
+
+      if (cfg.dryRun) {
+        log.warn(
+          chalk.yellow('[DRY_RUN] Would upload release asset:'),
+          version
+        );
+      } else {
+        uploadAsset(api, cfg, version);
+      }
     }
   } catch (error) {
     log(error.stack);

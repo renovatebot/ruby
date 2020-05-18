@@ -6,5 +6,5 @@ inputs:
     required: false
     default: false
 runs:
-  using: 'node12'
-  main: '../../dist/builder/index.js'
+  using: 'docker'
+  image: 'Dockerfile'
