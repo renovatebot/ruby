@@ -8,7 +8,7 @@ export { GitHub };
 const ubuntu = getEnv('UBUNTU_VERSION') || '18.04';
 
 function getName(cfg: Config, version: string): string {
-  return `${cfg.image}-${ubuntu}-${version}.tar.xz`;
+  return `${cfg.image}-${version}-${ubuntu}.tar.xz`;
 }
 
 async function findRelease(
