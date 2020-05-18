@@ -5,6 +5,9 @@ inputs:
     description: 'do not publish anything'
     required: false
     default: false
+  token:
+    description: 'github token'
+    required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node12'
+  main: '../../dist/builder/index.js'

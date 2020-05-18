@@ -1,23 +1,16 @@
 import 'source-map-support/register';
 import 'renovate/dist/util/cache/global/file';
-import { createWriteStream } from 'fs';
-import { pipeline as _pipeline } from 'stream';
-import { promisify } from 'util';
 import { setFailed } from '@actions/core';
 import chalk from 'chalk';
-import lzma from 'lzma-native';
 import { ReleaseResult, getPkgReleases } from 'renovate/dist/datasource';
 import { get as getVersioning } from 'renovate/dist/versioning';
 import shell from 'shelljs';
-import tar from 'tar';
 import { Config } from '../types/builder';
 import { exec, getArg, getWorkspace } from '../util';
 import { getConfig } from '../utils/config';
 import { preparePages } from '../utils/git';
 import { GitHub, hasAsset, uploadAsset } from '../utils/github';
 import log from '../utils/logger';
-
-const pipeline = promisify(_pipeline);
 
 let builds = 1;
 
@@ -28,19 +21,14 @@ async function dockerRun(...args: string[]): Promise<void> {
   await docker('run', '--rm', ...args);
 }
 
-async function runBuilder(
-  ws: string,
-  path: string,
-  version: string
-): Promise<void> {
+async function runBuilder(ws: string, version: string): Promise<void> {
   await dockerRun(
     '--name',
     'builder',
     '--volume',
-    `${ws}/.cache/${path}:/usr/local/${path}`,
+    `${ws}/.cache:/cache`,
     'builder',
-    version,
-    `/usr/local/${path}/${version}`
+    version
   );
 }
 let latestStable: string | undefined;
@@ -147,7 +135,7 @@ async function getBuildList({
 
     const versions = await getBuildList(cfg);
 
-    shell.mkdir('-p', `${ws}/.cache/${cfg.image}`);
+    shell.mkdir('-p', `${ws}/.cache`);
 
     for (const version of versions) {
       if (hasAsset(api, cfg, version)) {
@@ -167,23 +155,8 @@ async function getBuildList({
         break;
       }
 
-      log('Building version:', version);
-      await runBuilder(ws, cfg.image, version);
-
-      log('Compressing version:', version);
-      const output = createWriteStream(
-        `./.cache/${cfg.image}-${version}.tar.xz`
-      );
-      const compressor = lzma.createCompressor();
-
-      const input = tar.c(
-        {
-          cwd: `.cache/${cfg.image}`,
-        },
-        [version]
-      );
-
-      await pipeline(input, compressor, output);
+      log.info('Runing builder:', version);
+      await runBuilder(ws, version);
 
       if (cfg.dryRun) {
         log.warn(

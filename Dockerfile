@@ -16,7 +16,7 @@ COPY --from=renovate/buildpack:2@sha256:aef8983a8b38490b3182bb00ec27967f49e90ce8
 ENV BASH_ENV=/usr/local/etc/env
 SHELL ["/bin/bash" , "-c"]
 
-ENTRYPOINT [ "docker-entrypoint.sh", "node", "dist" ]
+ENTRYPOINT [ "docker-entrypoint.sh", "builder.sh" ]
 
 RUN install-apt \
   build-essential \
@@ -31,7 +31,8 @@ RUN set -ex; \
   PREFIX=/usr/local ./ruby-build/install.sh; \
   rm -rf ruby-build;
 
-COPY dist dist
+COPY bin /usr/local/bin
+
 # rebuild trigger
 # renovate: datasource=ruby-version depName=ruby-version versioning=ruby
 ENV RUBY_VERSION=2.7.1
