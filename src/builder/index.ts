@@ -178,7 +178,7 @@ const DefaultUbuntuRelease = '18.04';
 
       const input = tar.c(
         {
-          cwd: '.cache/${path}',
+          cwd: `.cache/${cfg.image}`,
         },
         [version]
       );
