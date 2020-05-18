@@ -1,12 +1,14 @@
 import { GitHub, context } from '@actions/github';
 import { Octokit } from '@octokit/rest';
 import { Config } from '../types/builder';
-import { getArg, readBuffer } from '../util';
+import { getArg, getEnv, readBuffer } from '../util';
 
 export { GitHub };
 
+const ubuntu = getEnv('UBUNTU_VERSION') || '18.04';
+
 function getName(cfg: Config, version: string): string {
-  return `${cfg.image}-${version}.tar.xz`;
+  return `${cfg.image}-${ubuntu}-${version}.tar.xz`;
 }
 
 async function findRelease(

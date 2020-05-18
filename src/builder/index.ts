@@ -150,12 +150,14 @@ async function getBuildList({
         }
       }
 
-      if (builds-- < 0) {
-        log('Build limit reached');
+      if (builds-- <= 0) {
+        log.info('Build limit reached');
         break;
       }
 
-      log.info('Runing builder:', version);
+      log.info('Processing version:', version);
+
+      log('Runing builder:', version);
       await runBuilder(ws, version);
 
       if (cfg.dryRun) {
@@ -164,6 +166,7 @@ async function getBuildList({
           version
         );
       } else {
+        log('Uploading release:', version);
         uploadAsset(api, cfg, version);
       }
     }
