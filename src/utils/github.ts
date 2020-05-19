@@ -14,7 +14,7 @@ function getName(cfg: Config, version: string): string {
 function getBody(cfg: Config, version: string): string {
   return `### Bug Fixes
 
-    * **deps:** update dependency ${cfg.image} v${version}`;
+* **deps:** update dependency ${cfg.image} v${version}`;
 }
 
 async function findRelease(
