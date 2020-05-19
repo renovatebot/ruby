@@ -8,7 +8,7 @@ import shell from 'shelljs';
 import { Config } from '../types/builder';
 import { exec, getArg, getWorkspace } from '../util';
 import { getConfig } from '../utils/config';
-import { GitHub, hasAsset, uploadAsset } from '../utils/github';
+import { GitHub, hasAsset, updateRelease, uploadAsset } from '../utils/github';
 import log from '../utils/logger';
 
 let builds = 99;
@@ -135,6 +135,7 @@ async function getBuildList({
     shell.mkdir('-p', `${ws}/.cache`);
 
     for (const version of versions) {
+      await updateRelease(api, cfg, version);
       if (await hasAsset(api, cfg, version)) {
         if (cfg.dryRun) {
           log.warn(

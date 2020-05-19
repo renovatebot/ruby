@@ -1,7 +1,7 @@
 import { GitHub, context } from '@actions/github';
 import { Octokit } from '@octokit/rest';
 import { Config } from '../types/builder';
-import { getArg, getEnv, readBuffer } from '../util';
+import { getEnv, readBuffer } from '../util';
 
 export { GitHub };
 
@@ -9,6 +9,12 @@ const ubuntu = getEnv('UBUNTU_VERSION') || '18.04';
 
 function getName(cfg: Config, version: string): string {
   return `${cfg.image}-${version}-${ubuntu}.tar.xz`;
+}
+
+function getBody(cfg: Config, version: string): string {
+  return `### Bug Fixes
+
+    * **deps:** update dependency ${cfg.image} v${version}`;
 }
 
 async function findRelease(
@@ -29,6 +35,37 @@ async function findRelease(
   return null;
 }
 
+async function createRelease(
+  api: GitHub,
+  cfg: Config,
+  version: string
+): Promise<Octokit.ReposCreateReleaseResponse> {
+  const { data } = await api.repos.createRelease({
+    ...context.repo,
+    tag_name: version,
+    name: version,
+    body: getBody(cfg, version),
+  });
+  return data;
+}
+
+export async function updateRelease(
+  api: GitHub,
+  cfg: Config,
+  version: string
+): Promise<void> {
+  const rel = await findRelease(api, version);
+  if (rel == null || rel?.name == version) {
+    return;
+  }
+  await api.repos.updateRelease({
+    ...context.repo,
+    release_id: rel.id,
+    name: version,
+    body: getBody(cfg, version),
+  });
+}
+
 export async function uploadAsset(
   api: GitHub,
   cfg: Config,
@@ -38,12 +75,7 @@ export async function uploadAsset(
     const rel = await findRelease(api, version);
     const url =
       rel == null
-        ? (
-            await api.repos.createRelease({
-              ...context.repo,
-              tag_name: version,
-            })
-          ).data.upload_url
+        ? (await createRelease(api, cfg, version)).upload_url
         : rel.upload_url;
 
     const name = getName(cfg, version);
@@ -63,14 +95,6 @@ export async function uploadAsset(
       throw e;
     }
   }
-}
-
-export async function hasRelease(version: string): Promise<boolean> {
-  const token = getArg('token', { required: true });
-
-  const api = new GitHub(token);
-
-  return null != (await findRelease(api, version));
 }
 
 export async function hasAsset(
