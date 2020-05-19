@@ -54,15 +54,16 @@ export async function updateRelease(
   cfg: Config,
   version: string
 ): Promise<void> {
+  const body = getBody(cfg, version);
   const rel = await findRelease(api, version);
-  if (rel == null || rel?.name == version) {
+  if (rel == null || rel.name == version || rel.body !== body) {
     return;
   }
   await api.repos.updateRelease({
     ...context.repo,
     release_id: rel.id,
     name: version,
-    body: getBody(cfg, version),
+    body,
   });
 }
 
