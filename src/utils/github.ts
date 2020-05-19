@@ -56,7 +56,7 @@ export async function updateRelease(
 ): Promise<void> {
   const body = getBody(cfg, version);
   const rel = await findRelease(api, version);
-  if (rel == null || rel.name === version || rel.body === body) {
+  if (rel == null || (rel.name === version && rel.body === body)) {
     return;
   }
   await api.repos.updateRelease({
