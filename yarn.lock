@@ -7442,10 +7442,10 @@ simple-git@1.132.0:
   dependencies:
     debug "^4.0.1"
 
-simple-git@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.7.1.tgz#10a6580ab863a81a6aefae65be0fcfa6bbf254c7"
-  integrity sha512-3FblERiLTA6ecoDu54Ys2simW327Yj9scpS2QsrJC4NpGCIsOLbBUwTdw76sqI7Fz7uYqM81xOdnrZaBeG3QuA==
+simple-git@2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.7.2.tgz#6b0de98fbdc94e22dfca5a306dc59155cff3cb40"
+  integrity sha512-SXsUw80Fppq72JI+QhfKY5d4sk8WQ2CppAcjp559OInjxYZzco7L9scsd5NwForcaQSCstNh7tsW6NnrGYfdgg==
   dependencies:
     "@kwsites/file-exists" "^1.1.1"
     debug "^4.1.1"
