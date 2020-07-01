@@ -61,6 +61,6 @@
     "shelljs": "0.8.4",
     "simple-git": "2.11.0",
     "ts-jest": "26.1.1",
-    "typescript": "3.9.5"
+    "typescript": "3.9.6"
   }
 }
