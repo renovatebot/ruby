@@ -32,7 +32,7 @@
     "semver": "7.3.2",
     "source-map-support": "0.5.19",
     "strip-ansi": "6.0.0",
-    "tar": "6.0.2",
+    "tar": "6.0.5",
     "www-authenticate": "0.6.2"
   },
   "devDependencies": {
