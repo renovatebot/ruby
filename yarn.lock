@@ -7507,10 +7507,10 @@ simple-git@1.132.0:
   dependencies:
     debug "^4.0.1"
 
-simple-git@2.20.0:
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.20.0.tgz#17234eb6b0ac69c6c2df3da5bb86a9b86550abad"
-  integrity sha512-eY33ZxbX8hlTXqXVu2JDXK/Iy/Vf8OmIoYdhN237KbU0fdb+SgPrW9+wgyk65AYcwlQU8xIDOXA9sq4rNnGpdA==
+simple-git@2.20.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.20.1.tgz#bab3f4d083ed6e1655a7c62ab8e8920eecae86f6"
+  integrity sha512-aa9s2ZLjXlHCVGbDXQLInMLvLkxKEclqMU9X5HMXi3tLWLxbWObz1UgtyZha6ocHarQtFp0OjQW9KHVR1g6wbA==
   dependencies:
     "@kwsites/file-exists" "^1.1.1"
     "@kwsites/promise-deferred" "^1.1.1"
