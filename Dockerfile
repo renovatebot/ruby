@@ -9,8 +9,8 @@ FROM renovate/ubuntu:${UBUNTU_VERSION} as build
 
 USER root
 
-COPY --from=renovate/buildpack:2@sha256:a0b938f437a0ac5575c3c6ada0f16fac4f7454746dfa0daad98cc4fbe489fb76 /usr/local/build /usr/local/build
-COPY --from=renovate/buildpack:2@sha256:a0b938f437a0ac5575c3c6ada0f16fac4f7454746dfa0daad98cc4fbe489fb76 /usr/local/bin /usr/local/bin
+COPY --from=renovate/buildpack:2@sha256:9d8d1df511b8a1055cb861a0be1d8d75d53b388e0d460825188ac8cb62059221 /usr/local/build /usr/local/build
+COPY --from=renovate/buildpack:2@sha256:9d8d1df511b8a1055cb861a0be1d8d75d53b388e0d460825188ac8cb62059221 /usr/local/bin /usr/local/bin
 
 # loading env
 ENV BASH_ENV=/usr/local/etc/env
