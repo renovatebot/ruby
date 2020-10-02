@@ -1,5 +1,4 @@
 import 'source-map-support/register';
-import 'renovate/dist/util/cache/global/file';
 import { setFailed } from '@actions/core';
 import chalk from 'chalk';
 import { ReleaseResult, getPkgReleases } from 'renovate/dist/datasource';
