@@ -59,7 +59,7 @@
     "prettier-plugin-package": "1.1.0",
     "pretty-quick": "2.0.2",
     "shelljs": "0.8.4",
-    "simple-git": "2.20.1",
+    "simple-git": "2.21.0",
     "ts-jest": "26.4.1",
     "typescript": "3.9.7"
   }
