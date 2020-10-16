@@ -705,6 +705,11 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-3.1.2.tgz#548650de521b344e3781fbdb0ece4aa6f729afb8"
   integrity sha512-JiX9vxoKMmu8Y3Zr2RVathBL1Cdu4Nt4MuNWemt1Nc06A0RAin9c5FArkhGsyMBWfCu4zj+9b+GxtjAnE4qqLQ==
 
+"@sindresorhus/is@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-4.0.0.tgz#2ff674e9611b45b528896d820d3d7a812de2f0e4"
+  integrity sha512-FyD2meJpDPjyNQejSjvnhpgI/azsQkA4lGbuu5BQZfjvJ9cbRZXzeWL2HceCekW4lixO9JPesIIQkSoLjeJHNQ==
+
 "@sinonjs/commons@^1.7.0":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.7.2.tgz#505f55c74e0272b43f6c52d81946bed7058fc0e2"
@@ -5934,14 +5939,14 @@ remove-trailing-separator@^1.0.1:
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
   integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
 
-renovate@23.49.5:
-  version "23.49.5"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-23.49.5.tgz#521f981263d3b2fb881db97bb1fe4a911b9599b9"
-  integrity sha512-+guOS8Jr4T8xYYq1JFozuVmIjXZUMyOuG4LA42Yrr9vA+JmK9ITmpKcRnMWVBip9fQXPxola4hlbHtNykGf0BQ==
+renovate@23.49.6:
+  version "23.49.6"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-23.49.6.tgz#7b0a8e67b3954ac7fcaaac36c5dc3a3a6fe87c75"
+  integrity sha512-oH7oWIKrX2unR6ykTSBpyzfdwBSs5j9EdqD8YXNZPN+VHZNadGvFiRs/dpT1Bcj0BlTQVo2Hf4jyU89jvcQ+rw==
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@renovatebot/ruby-semver" "0.2.1"
-    "@sindresorhus/is" "3.1.2"
+    "@sindresorhus/is" "4.0.0"
     "@yarnpkg/core" "2.3.1"
     "@yarnpkg/parsers" "2.3.0"
     aws-sdk "2.771.0"
