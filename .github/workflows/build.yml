@@ -27,11 +27,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.3
 
       - name: Cache Yarn packages
         id: yarn_cache_packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2.1.2
         with:
           path: ${{ env.YARN_CACHE_FOLDER }}
           key: ${{ env.YARN_CACHE_KEY }}-${{ runner.os }}-yarn_cache-${{ hashFiles('**/yarn.lock') }}
@@ -39,7 +39,7 @@ jobs:
             ${{ env.YARN_CACHE_KEY }}-${{ runner.os }}-yarn_cache-
 
       - name: Cache node_modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2.1.2
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.NODE_VERSION }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -54,7 +54,7 @@ jobs:
       - name: Build
         run: yarn install --frozen-lockfile --link-duplicates
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2.2.0
         with:
           name: builder
           path: dist/
@@ -78,9 +78,9 @@ jobs:
         with:
           command: docker-config
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.3
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2.0.5
         with:
           name: builder
           path: ./dist
@@ -95,7 +95,7 @@ jobs:
           dry-run: ${{github.ref != 'refs/heads/master'}}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2.2.0
         with:
           name: ${{ matrix.ubuntu_version }}
           path: .cache/*.tar.xz
