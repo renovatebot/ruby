@@ -1,9 +1,15 @@
-import { GitHub, context } from '@actions/github';
-import { Octokit } from '@octokit/rest';
+import { context, getOctokit } from '@actions/github';
+import { GitHub } from '@actions/github/lib/utils';
+import {
+  ReposCreateReleaseResponseData,
+  ReposGetReleaseResponseData,
+} from '@octokit/types';
 import { Config } from '../types/builder';
 import { getEnv, readBuffer } from '../util';
 
-export { GitHub };
+export { getOctokit };
+
+type GitHubOctokit = InstanceType<typeof GitHub>;
 
 const ubuntu = getEnv('UBUNTU_VERSION') || '18.04';
 
@@ -18,9 +24,9 @@ function getBody(cfg: Config, version: string): string {
 }
 
 async function findRelease(
-  api: GitHub,
+  api: GitHubOctokit,
   version: string
-): Promise<Octokit.ReposGetReleaseByTagResponse | null> {
+): Promise<ReposGetReleaseResponseData | null> {
   try {
     const res = await api.repos.getReleaseByTag({
       ...context.repo,
@@ -36,10 +42,10 @@ async function findRelease(
 }
 
 async function createRelease(
-  api: GitHub,
+  api: GitHubOctokit,
   cfg: Config,
   version: string
-): Promise<Octokit.ReposCreateReleaseResponse> {
+): Promise<ReposCreateReleaseResponseData> {
   const { data } = await api.repos.createRelease({
     ...context.repo,
     tag_name: version,
@@ -50,7 +56,7 @@ async function createRelease(
 }
 
 export async function updateRelease(
-  api: GitHub,
+  api: GitHubOctokit,
   cfg: Config,
   version: string
 ): Promise<void> {
@@ -68,28 +74,31 @@ export async function updateRelease(
 }
 
 export async function uploadAsset(
-  api: GitHub,
+  api: GitHubOctokit,
   cfg: Config,
   version: string
 ): Promise<void> {
   try {
     const rel = await findRelease(api, version);
-    const url =
-      rel == null
-        ? (await createRelease(api, cfg, version)).upload_url
-        : rel.upload_url;
+    let release_id = rel?.id ?? 0;
+
+    if (rel == null) {
+      const { id } = await createRelease(api, cfg, version);
+      release_id = id;
+    }
 
     const name = getName(cfg, version);
     const data = await readBuffer(`.cache/${name}`);
 
     await api.repos.uploadReleaseAsset({
+      ...context.repo,
+      release_id,
       data,
       name,
       headers: {
         'content-type': 'application/octet-stream',
         'content-length': data.length,
       },
-      url,
     });
   } catch (e) {
     if (e.status !== 404) {
@@ -99,7 +108,7 @@ export async function uploadAsset(
 }
 
 export async function hasAsset(
-  api: GitHub,
+  api: GitHubOctokit,
   cfg: Config,
   version: string
 ): Promise<boolean> {

@@ -7,7 +7,12 @@ import shell from 'shelljs';
 import { Config } from '../types/builder';
 import { exec, getArg, getWorkspace } from '../util';
 import { getConfig } from '../utils/config';
-import { GitHub, hasAsset, updateRelease, uploadAsset } from '../utils/github';
+import {
+  getOctokit,
+  hasAsset,
+  updateRelease,
+  uploadAsset,
+} from '../utils/github';
 import log from '../utils/logger';
 
 let builds = 99;
@@ -125,7 +130,7 @@ async function getBuildList({
     }
 
     const token = getArg('token', { required: true });
-    const api = new GitHub(token);
+    const api = getOctokit(token);
 
     log('config:', JSON.stringify(cfg));
 
