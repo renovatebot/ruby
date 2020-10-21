@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Set up Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v1.4.4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -52,7 +52,7 @@ jobs:
         run: yarn cache clean
 
       - name: Build
-        run: yarn install --frozen-lockfile --link-duplicates
+        run: yarn install --frozen-lockfile
 
       - uses: actions/upload-artifact@v2.2.0
         with:
