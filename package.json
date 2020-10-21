@@ -21,8 +21,9 @@
   "dependencies": {
     "@actions/core": "1.2.6",
     "@actions/exec": "1.0.4",
-    "@actions/github": "2.2.0",
+    "@actions/github": "4.0.0",
     "@actions/io": "1.0.2",
+    "@octokit/webhooks": "7.11.4",
     "@sindresorhus/is": "3.1.2",
     "chalk": "4.1.0",
     "find-up": "5.0.0",
@@ -36,6 +37,7 @@
     "www-authenticate": "0.6.2"
   },
   "devDependencies": {
+    "@octokit/types": "5.5.0",
     "@types/fs-extra": "9.0.2",
     "@types/jest": "25.2.3",
     "@types/lzma-native": "4.0.0",
