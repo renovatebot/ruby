@@ -54,6 +54,9 @@ jobs:
       - name: Build
         run: yarn install --frozen-lockfile
 
+      - name: Lint
+        run: yarn lint
+
       - uses: actions/upload-artifact@v2.2.0
         with:
           name: builder

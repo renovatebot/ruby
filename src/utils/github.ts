@@ -34,6 +34,7 @@ async function findRelease(
     });
     return res.data ?? null;
   } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (e.status !== 404) {
       throw e;
     }
@@ -101,6 +102,7 @@ export async function uploadAsset(
       },
     });
   } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (e.status !== 404) {
       throw e;
     }

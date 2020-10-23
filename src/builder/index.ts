@@ -173,7 +173,9 @@ async function getBuildList({
       }
     }
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     log(error.stack);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     setFailed(error.message);
   }
 })().catch(console.error);

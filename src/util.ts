@@ -5,7 +5,6 @@ import { endGroup, getInput, startGroup } from '@actions/core';
 import { exec as _exec } from '@actions/exec';
 import { ExecOptions as _ExecOptions } from '@actions/exec/lib/interfaces';
 import log from './utils/logger';
-import findUp = require('find-up');
 
 const readFileAsync = promisify(fs.readFile);
 
@@ -74,8 +73,10 @@ export function getWorkspace(): string {
 
 export async function readJson<T = unknown>(file: string): Promise<T> {
   const path = join(getWorkspace(), file);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const res = await import(path);
   // istanbul ignore next
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
   return res?.default ?? res;
 }
 
@@ -106,22 +107,4 @@ export function getArg(
 ): string | string[] {
   const val = getInput(name, opts);
   return opts?.multi ? val.split(MultiArgsSplitRe).filter(Boolean) : val;
-}
-
-let _pkg: Promise<string | undefined>;
-
-/**
- * Resolve path for a file relative to renovate root directory (our package.json)
- * @param file a file to resolve
- */
-export async function resolveFile(file: string): Promise<string> {
-  if (!_pkg) {
-    _pkg = findUp('package.json', { cwd: __dirname, type: 'file' });
-  }
-  const pkg = await _pkg;
-  // istanbul ignore if
-  if (!pkg) {
-    throw new Error('Missing package.json');
-  }
-  return join(pkg, '../', file);
 }

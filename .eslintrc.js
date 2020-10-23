@@ -12,6 +12,7 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:promise/recommended',
     'prettier',
     'prettier/@typescript-eslint',
