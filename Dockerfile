@@ -1,5 +1,4 @@
-# renovate: datasource=docker depName=renovate/ubuntu versioning=docker
-ARG UBUNTU_VERSION=18.04
+ARG UBUNTU_VERSION=latest
 
 
 #--------------------------------------
