@@ -77,7 +77,7 @@ jobs:
 
     steps:
       - name: docker-config
-        uses: renovatebot/internal-tools@v1.1.8
+        uses: renovatebot/internal-tools@v1.1.9
         with:
           command: docker-config
 
