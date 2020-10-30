@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/presets-internal:node"],
+  "extends": ["github>renovatebot/presets-internal"],
   "packageRules": [
     {
       "packageNames": ["renovate"],
