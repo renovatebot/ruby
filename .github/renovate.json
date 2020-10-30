@@ -5,7 +5,8 @@
     {
       "packageNames": ["renovate"],
       "extends": ["schedule:weekly"],
-      "automerge": true
+      "automerge": true,
+      "separateMinorPatch": false
     }
   ]
 }
