@@ -83,7 +83,7 @@ jobs:
 
       - uses: actions/checkout@v2.3.4
 
-      - uses: actions/download-artifact@v2.0.5
+      - uses: actions/download-artifact@v2.0.6
         with:
           name: builder
           path: ./dist
