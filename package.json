@@ -26,7 +26,7 @@
     "@octokit/webhooks": "7.15.1",
     "@sindresorhus/is": "4.0.0",
     "chalk": "4.1.0",
-    "renovate": "23.66.1",
+    "renovate": "23.89.3",
     "shelljs": "0.8.4",
     "source-map-support": "0.5.19",
     "strip-ansi": "6.0.0",
