@@ -2078,7 +2078,7 @@ debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
+debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -5693,10 +5693,10 @@ remove-trailing-separator@^1.0.1:
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
   integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
 
-renovate@23.89.3:
-  version "23.89.3"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-23.89.3.tgz#708f880643fad90a7435acb0f255280958af0291"
-  integrity sha512-VxzhfVC7F5U9zP/+5xVbFcVpPBBqRKoKA3GANaYIBW/Sw2KEqWBHN+xc7qeQE0MJQAA2m2HSdjVfDHbHWiPO8Q==
+renovate@23.94.1:
+  version "23.94.1"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-23.94.1.tgz#e811e2dd97455adb8fee691f07f698c27eff5509"
+  integrity sha512-090Vj7gDGMeDuY90lHLwiYiGXCGaO4QVKq577EEtsqXXQBPOmdfYgv3RLYkN83A/HF20qTFae3SNWQ6mz7MTCg==
   dependencies:
     "@breejs/later" "4.0.2"
     "@iarna/toml" "2.2.5"
@@ -5753,7 +5753,7 @@ renovate@23.89.3:
     semver-utils "1.1.4"
     shlex "2.0.2"
     shortid "2.2.16"
-    simple-git "2.22.0"
+    simple-git "2.24.0"
     slugify "1.4.6"
     traverse "0.6.6"
     upath "2.0.1"
@@ -6104,14 +6104,14 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
-simple-git@2.22.0:
-  version "2.22.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.22.0.tgz#650cdf5dfbc6e7771da19ff890862170a184077e"
-  integrity sha512-/8WMNrQ5slYl05jYOpeh4BIyMQc84PkEvk9YAcBHVJaPoAgoxzLzdRzUzWDZJ9U6Z2pUjLxkGcQC0kU4pbRN5Q==
+simple-git@2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.24.0.tgz#7ee22898d4155b3917b301ab97e937c52a33247d"
+  integrity sha512-nF31Xai5lTYgRCiSJ1lHzK0Vk9jWOvAFW12bdBaWy2bhodio04eOWYurvyM/nTBYsPIiQl3PFvdod5TRcPvzww==
   dependencies:
     "@kwsites/file-exists" "^1.1.1"
     "@kwsites/promise-deferred" "^1.1.1"
-    debug "^4.1.1"
+    debug "^4.3.1"
 
 sisteransi@^1.0.5:
   version "1.0.5"
