@@ -89,7 +89,8 @@ export async function uploadAsset(
     }
 
     const name = getName(cfg, version);
-    const data = await readBuffer(`.cache/${name}`);
+    // fake because api issues
+    const data: string = (await readBuffer(`.cache/${name}`)) as never;
 
     await api.repos.uploadReleaseAsset({
       ...context.repo,
