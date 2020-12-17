@@ -11,7 +11,7 @@ on:
 env:
   # https://github.com/chalk/supports-color/issues/106
   FORCE_COLOR: true
-  NODE_VERSION: 12
+  NODE_VERSION: 14
   YARN_CACHE_KEY: v1
   YARN_CACHE_FOLDER: .cache/yarn
 
