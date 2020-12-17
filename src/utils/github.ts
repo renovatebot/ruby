@@ -1,13 +1,13 @@
 import { context, getOctokit } from '@actions/github';
 import { GitHub } from '@actions/github/lib/utils';
-import {
-  ReposCreateReleaseResponseData,
-  ReposGetReleaseResponseData,
-} from '@octokit/types';
+import { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods';
 import { Config } from '../types/builder';
 import { getEnv, readBuffer } from '../util';
 
 export { getOctokit };
+
+type ReposGetReleaseResponseData = RestEndpointMethodTypes['repos']['getReleaseByTag']['response']['data'];
+type ReposCreateReleaseResponseData = RestEndpointMethodTypes['repos']['createRelease']['response']['data'];
 
 type GitHubOctokit = InstanceType<typeof GitHub>;
 
