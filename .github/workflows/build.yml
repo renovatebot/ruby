@@ -57,7 +57,7 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - uses: actions/upload-artifact@v2.2.1
+      - uses: actions/upload-artifact@v2.2.2
         with:
           name: builder
           path: dist/
@@ -98,7 +98,7 @@ jobs:
           dry-run: ${{github.ref != 'refs/heads/master'}}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/upload-artifact@v2.2.1
+      - uses: actions/upload-artifact@v2.2.2
         with:
           name: ${{ matrix.ubuntu_version }}
           path: .cache/*.tar.xz
