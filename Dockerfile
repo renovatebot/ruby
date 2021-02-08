@@ -25,5 +25,5 @@ RUN set -ex; \
 COPY bin /usr/local/bin
 
 # rebuild trigger
-# renovate: datasource=ruby-version depName=ruby-version versioning=ruby
+# renovate: datasource=ruby-version depName=ruby versioning=ruby
 ENV RUBY_VERSION=2.7.2
