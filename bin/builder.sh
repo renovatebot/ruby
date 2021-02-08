@@ -2,7 +2,7 @@
 
 RUBY_VERSION=${1}
 
-CODENAME=$(. /etc/os-release && echo ${VERSION_ID})
+CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 
 NAME=ruby
 

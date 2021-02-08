@@ -11,7 +11,7 @@ type ReposCreateReleaseResponseData = RestEndpointMethodTypes['repos']['createRe
 
 type GitHubOctokit = InstanceType<typeof GitHub>;
 
-const ubuntu = getEnv('UBUNTU_VERSION') || '18.04';
+const ubuntu = getEnv('UBUNTU_VERSION') || 'latest';
 
 function getName(cfg: Config, version: string): string {
   return `${cfg.image}-${version}-${ubuntu}.tar.xz`;

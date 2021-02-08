@@ -70,7 +70,7 @@ jobs:
 
     strategy:
       matrix:
-        ubuntu_version: [18.04, 20.04]
+        ubuntu_version: [bionic, focal]
 
     env:
       UBUNTU_VERSION: ${{ matrix.ubuntu_version }}
