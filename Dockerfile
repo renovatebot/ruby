@@ -1,10 +1,10 @@
-ARG UBUNTU_VERSION=latest
+ARG FLAVOR=latest
 
 
 #--------------------------------------
 # base image
 #--------------------------------------
-FROM renovate/buildpack:3-${UBUNTU_VERSION} as build
+FROM renovate/buildpack:3-${FLAVOR} as build
 
 USER root
 
