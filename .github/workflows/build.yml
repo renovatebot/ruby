@@ -8,97 +8,35 @@ on:
 
   pull_request:
 
-env:
-  # https://github.com/chalk/supports-color/issues/106
-  FORCE_COLOR: true
-  NODE_VERSION: 14
-  YARN_CACHE_KEY: v1
-  YARN_CACHE_FOLDER: .cache/yarn
-
 jobs:
-  compile:
-    runs-on: ubuntu-latest
-
-    timeout-minutes: 10
-
-    steps:
-      - name: Set up Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v2.1.4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - uses: actions/checkout@v2.3.4
-
-      - name: Cache Yarn packages
-        id: yarn_cache_packages
-        uses: actions/cache@v2.1.4
-        with:
-          path: ${{ env.YARN_CACHE_FOLDER }}
-          key: ${{ env.YARN_CACHE_KEY }}-${{ runner.os }}-yarn_cache-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ env.YARN_CACHE_KEY }}-${{ runner.os }}-yarn_cache-
-
-      - name: Cache node_modules
-        uses: actions/cache@v2.1.4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.NODE_VERSION }}-yarn-
-
-      # Clear caches on cache miss, otherwise they will grow indefinitely
-      - name: Clear yarn cache
-        if: github.ref == 'refs/heads/master' && steps.yarn_cache_packages.outputs.cache-hit != 'true'
-        run: yarn cache clean
-
-      - name: Build
-        run: yarn install --frozen-lockfile
-
-      - name: Lint
-        run: yarn lint
-
-      - uses: actions/upload-artifact@v2.2.2
-        with:
-          name: builder
-          path: dist/
-
   build:
-    needs: [compile]
     runs-on: ubuntu-latest
-
-    # timeout-minutes: 60
 
     strategy:
       matrix:
-        ubuntu_version: [bionic, focal]
+        flavor: [bionic, focal]
 
     env:
-      UBUNTU_VERSION: ${{ matrix.ubuntu_version }}
+      FLAVOR: ${{ matrix.flavor }}
 
     steps:
+      - uses: actions/checkout@v2.3.4
+
       - name: docker-config
-        uses: renovatebot/internal-tools@v1.2.25
+        uses: renovatebot/internal-tools@v1.3.2
         with:
           command: docker-config
 
-      - uses: actions/checkout@v2.3.4
-
-      - uses: actions/download-artifact@v2.0.8
+      - name: binary-builder
+        uses: renovatebot/internal-tools@v1.3.2
         with:
-          name: builder
-          path: ./dist
-
-      - name: Prepare
-        run: |
-          docker buildx build --load -t builder --build-arg UBUNTU_VERSION .
-
-      - name: builder
-        uses: ./actions/builder/
-        with:
+          command: binary-builder
           dry-run: ${{github.ref != 'refs/heads/master'}}
+          build-args: FLAVOR
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/upload-artifact@v2.2.2
         with:
-          name: ${{ matrix.ubuntu_version }}
+          name: ${{ matrix.flavor }}
           path: .cache/*.tar.xz
+          if-no-files-found: error
