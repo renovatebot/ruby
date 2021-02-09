@@ -33,5 +33,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2.2.2
         with:
-          name: ${{ matrix.flavor }}
+          name: ${{ env.FLAVOR }}
           path: .cache/*.tar.xz
