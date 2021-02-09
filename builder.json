@@ -1,5 +1,6 @@
 {
   "image": "ruby",
+  "depName": "ruby",
   "datasource": "ruby-version",
   "versioning": "ruby",
   "startVersion": "2.5.0",
