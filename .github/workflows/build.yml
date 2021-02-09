@@ -8,16 +8,12 @@ on:
 
   pull_request:
 
+env:
+  FLAVOR: focal
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        flavor: [bionic, focal]
-
-    env:
-      FLAVOR: ${{ matrix.flavor }}
 
     steps:
       - uses: actions/checkout@v2.3.4
