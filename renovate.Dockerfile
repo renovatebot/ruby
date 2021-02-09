@@ -1,7 +1,11 @@
+#-------------------------
+# renovate rebuild trigger
+#-------------------------
+
+# makes lint happy
 FROM scratch
 
 
-# rebuild trigger
 # renovate: datasource=ruby-version depName=ruby versioning=ruby
 ENV RUBY_VERSION=2.7.2
 
