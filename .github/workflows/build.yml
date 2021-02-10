@@ -9,7 +9,7 @@ on:
   pull_request:
 
 env:
-  FLAVOR: focal
+  FLAVOR: focal # build target, name required by binary-builder
 
 jobs:
   build:

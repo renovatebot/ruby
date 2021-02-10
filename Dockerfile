@@ -4,7 +4,9 @@
 #--------------------------------------
 FROM renovate/buildpack:4 as build
 
-USER root
+# build target, name required by binary-builder
+ARG FLAVOR
+RUN . /etc/os-release; [ "${VERSION_CODENAME}" == "${FLAVOR}" ] || exit 55
 
 ENTRYPOINT [ "docker-entrypoint.sh", "builder.sh" ]
 
