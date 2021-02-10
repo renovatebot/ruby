@@ -1,12 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/presets-internal"],
-  "packageRules": [
-    {
-      "packageNames": ["renovate"],
-      "extends": ["schedule:weekly"],
-      "automerge": true,
-      "separateMinorPatch": false
-    }
-  ]
+  "extends": ["github>renovatebot/.github"]
 }
