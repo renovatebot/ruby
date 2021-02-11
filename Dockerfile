@@ -1,12 +1,12 @@
-ARG FLAVOR=latest
-
 
 #--------------------------------------
 # base image
 #--------------------------------------
-FROM renovate/buildpack:3-${FLAVOR} as build
+FROM renovate/buildpack:4 as build
 
-USER root
+# build target, name required by binary-builder
+ARG FLAVOR
+RUN . /etc/os-release; [ "${VERSION_CODENAME}" == "${FLAVOR}" ] || exit 55
 
 ENTRYPOINT [ "docker-entrypoint.sh", "builder.sh" ]
 
@@ -23,7 +23,3 @@ RUN set -ex; \
   rm -rf ruby-build;
 
 COPY bin /usr/local/bin
-
-# rebuild trigger
-# renovate: datasource=ruby-version depName=ruby versioning=ruby
-ENV RUBY_VERSION=3.0.0

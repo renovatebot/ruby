@@ -8,16 +8,12 @@ on:
 
   pull_request:
 
+env:
+  FLAVOR: focal # build target, name required by binary-builder
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        flavor: [bionic, focal]
-
-    env:
-      FLAVOR: ${{ matrix.flavor }}
 
     steps:
       - uses: actions/checkout@v2.3.4
@@ -37,5 +33,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2.2.2
         with:
-          name: ${{ matrix.flavor }}
+          name: ${{ env.FLAVOR }}
           path: .cache/*.tar.xz
