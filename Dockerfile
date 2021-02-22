@@ -2,7 +2,7 @@
 #--------------------------------------
 # base image
 #--------------------------------------
-FROM renovate/buildpack:4@sha256:fdeb1049fbce5cf7ff3c340546bab022beddccc6e694309a48f9b6a9c5f1e116 as build
+FROM renovate/buildpack:4@sha256:d25d3139e52e4fce971dfd47b4f99b6c297ca1f8dfec5a5de4a507db065dadb5 as build
 
 # build target, name required by binary-builder
 ARG FLAVOR
