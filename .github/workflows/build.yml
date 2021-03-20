@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - master
+      - main
       - 'renovate/**'
 
   pull_request:
@@ -27,7 +27,7 @@ jobs:
         uses: renovatebot/internal-tools@v1.3.6
         with:
           command: binary-builder
-          dry-run: ${{github.ref != 'refs/heads/master'}}
+          dry-run: ${{github.ref != 'refs/heads/main'}}
           build-args: FLAVOR
           token: ${{ secrets.GITHUB_TOKEN }}
 
