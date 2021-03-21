@@ -8,12 +8,16 @@ on:
 
   pull_request:
 
-env:
-  FLAVOR: focal # build target, name required by binary-builder
-
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        flavor: [focal, bionic]
+
+    env:
+      FLAVOR: ${{ matrix.flavor }} # build target, name required by binary-builder
 
     steps:
       - uses: actions/checkout@v2.3.4
